@@ -19,10 +19,10 @@ def print_base(r,n,in_hex=0):
             print("\t{},".format(x))
     print(']')
 
-
     
 def print_params(r):
     print("PARAMS")
+    print("r={}".format(hex(r)))
     print("r in base 64")
     print_base(r, 64)
     print("r in base 32")
@@ -49,15 +49,23 @@ def print_params(r):
     assert (g**t)**(2**s) == 1
 
     print("INV")
-    print(hex(Zmod(1<<64)(-1/r_jubjub)))
+    inv = Zmod(1<<64)(-1/r)
+    print(hex(inv))
 
     print("R")
+    print("R = {}".format(hex(R)))
     print_base(R, 64,1)
     print("R2")
-    print(hex(R**2))
     print_base(R**2, 64,1)
     print("R3")
     print_base(R**3, 64,1)
+
+    print("BYTES R2 (R)")
+    print_base(R, 8)
+    print("BYTES -1 (-1/R)")
+    print_base(Fr(-1/R), 8)
+    print("BYTES R2")
+    print_base(R**2,8)
 
     print('\n\n')
 
